@@ -4,8 +4,8 @@ console.log('App.js is running');
 
 //JSX-Javascript XML
 var app = {
-    title: 'Hello World',
-    subtitle: 'This is an Indecision App',
+    title: 'Indecision App',
+    subtitle: 'Add task and let the app decide what you should do next.',
     options: []
 
     // function optionsRender (arr) {
@@ -34,7 +34,13 @@ var removeAll = function removeAll() {
     app.options = [];
     renderIndecisionApp();
 };
-var numbers = [55, 101, 1000];
+
+var makeDecision = function makeDecision() {
+    var randomNum = Math.floor(Math.random() * app.options.length);
+    var randomOption = app.options[randomNum];
+    alert(randomOption);
+};
+
 var renderIndecisionApp = function renderIndecisionApp() {
     var template = React.createElement(
         'div',
@@ -51,9 +57,9 @@ var renderIndecisionApp = function renderIndecisionApp() {
         ),
         app.options.length > 0 ? 'Here are your options' : 'No options',
         React.createElement(
-            'p',
-            null,
-            app.options.length
+            'button',
+            { disabled: app.options.length === 0, onClick: makeDecision },
+            'What should I do?'
         ),
         React.createElement(
             'button',

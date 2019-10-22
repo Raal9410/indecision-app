@@ -2,8 +2,8 @@ console.log('App.js is running')
 
 //JSX-Javascript XML
 const app = {
-    title: 'Hello World',
-    subtitle: 'This is an Indecision App',
+    title: 'Indecision App',
+    subtitle: 'Add task and let the app decide what you should do next.',
     options: []
 }
 
@@ -33,24 +33,23 @@ const removeAll = () =>{
     app.options = []
     renderIndecisionApp()
 }
-const numbers = [55, 101, 1000]
+
+const makeDecision = () => {
+    const randomNum = Math.floor(Math.random() * app.options.length)
+    const randomOption = app.options[randomNum]
+    alert(randomOption)
+}
+
 const renderIndecisionApp=()=>{
     const template = (
     <div>
         <h1>{app.title}</h1>
         {app.subtitle && <p>{app.subtitle}</p>}
         {app.options.length>0 ? 'Here are your options' : 'No options'}
-        <p>{app.options.length}</p>
+        <button disabled={app.options.length === 0} onClick={makeDecision}>What should I do?</button>
         <button onClick={removeAll}> Remove All</button>
-        {/* {
-            numbers.map((number, i)=>{
-                return <p key={i}>Number:{number}</p>
-            })
-        } */}
         <ul>
-            {app.options.map((option, i)=>{
-                return <li key={i}>{option}</li>
-            })}
+            {app.options.map((option, i)=> <li key={i}>{option}</li>)}
         </ul>
     <form onSubmit={onFormSubmit}>
         <input type="text" name="option"/>
