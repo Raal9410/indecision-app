@@ -1,10 +1,10 @@
 console.log('App.js is running')
 
 //JSX-Javascript XML
-var app = {
+const app = {
     title: 'Hello World',
     subtitle: 'This is an Indecision App',
-    options: ['One', 'Two']
+    options: []
 }
 
 // function optionsRender (arr) {
@@ -17,41 +17,50 @@ var app = {
 //     } else {
 //         return <p>No options</p>
 //     }
-// }
-var template = (
-<div>
-    <h1>{app.title}</h1>
-    {app.subtitle && <p>{app.subtitle}</p>}
-    {app.options.length>0 ? 'Here are your options' : 'No options'}
-    <ul>
-        <li>Item one</li>
-        <li>Item two</li>
-    </ul>
-</div>
-)
+// }]
 
-var user = {
-    name: '',
-    age: '25',
-    location: 'Mexico City' 
-}
-
-// var userName = 'Raul'
-// var userLastName = 'Hernandez'
-// var userAge = '25'
-// var userLocation = 'Mexico City'
-
-const getLocation = (location) => {
-    if (location){
-        return <p>Location: {location}</p>
+const onFormSubmit = (e) => {
+    e.preventDefault(e)
+    const option = e.target.elements.option.value
+    if(option){
+        app.options.push(option)
+        e.target.elements.option.value = ''
     }
+renderIndecisionApp()
 }
-var templateTwo = (
+
+const removeAll = () =>{
+    app.options = []
+    renderIndecisionApp()
+}
+const numbers = [55, 101, 1000]
+const renderIndecisionApp=()=>{
+    const template = (
     <div>
-        <h1>{user.name ? user.name : 'Anonymous'}</h1>
-        {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
-        {getLocation(user.location)}
+        <h1>{app.title}</h1>
+        {app.subtitle && <p>{app.subtitle}</p>}
+        {app.options.length>0 ? 'Here are your options' : 'No options'}
+        <p>{app.options.length}</p>
+        <button onClick={removeAll}> Remove All</button>
+        {/* {
+            numbers.map((number, i)=>{
+                return <p key={i}>Number:{number}</p>
+            })
+        } */}
+        <ul>
+            {app.options.map((option, i)=>{
+                return <li key={i}>{option}</li>
+            })}
+        </ul>
+    <form onSubmit={onFormSubmit}>
+        <input type="text" name="option"/>
+        <button>Add Option</button>
+    </form>
     </div>
-)
-var appRoot = document.getElementById('app')
-ReactDOM.render(template, appRoot)
+    )
+    ReactDOM.render(template, appRoot)
+}
+
+const appRoot = document.getElementById('app')
+
+renderIndecisionApp()
