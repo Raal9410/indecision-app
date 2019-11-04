@@ -1,9 +1,8 @@
-import subtract, {square, add} from './utils'
-console.log('app.js is running!')
-console.log(square(5))
-console.log(add(1,2))
-console.log(subtract(100,80))
+import React from 'react'
+import ReactDOM from 'react-dom'
+//import validator from 'validator'
 
-// import {isAdult, canDrink} from './person'
-// console.log(isAdult(17))
-// console.log(canDrink(22))
+//console.log(validator.isEmail('test '))
+
+const template = <p>THIS IS JSX FROM WEBPACK</p>
+ReactDOM.render(template, document.getElementById('app'))
