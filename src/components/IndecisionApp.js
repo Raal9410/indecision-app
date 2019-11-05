@@ -6,18 +6,11 @@ import Header from './Header'
 
 
 class IndecisionApp extends React.Component{
-    constructor(props){
-        super(props)
-        this.handleDeleteOptions = this.handleDeleteOptions.bind(this)
-        this.handlePick = this.handlePick.bind(this)
-        this.handleAddOption = this.handleAddOption.bind(this)
-        this.handleDeleteOneOption = this.handleDeleteOneOption.bind(this)
-        this.state ={
-            options: []
-        }
+    state = {
+        options : []
     }
     //lifecycle methods
-    componentDidMount(){
+    componentDidMount () {
        try{
         const json = localStorage.getItem('options')
         const options = JSON.parse(json)
@@ -31,33 +24,33 @@ class IndecisionApp extends React.Component{
 
         //console.log('fetching data')
     }
-    componentDidUpdate(prevProps, prevState){
+    componentDidUpdate (prevProps, prevState){
         if(prevState.options.length !== this.state.options.length){
         const json = JSON.stringify(this.state.options)
         localStorage.setItem('options', json)
         // console.log('saving data')
         }
     }
-    componentWillUnmount(){
+    componentWillUnmount () {
         console.log('componentWillUnmount')
     }
     //
-    handleDeleteOptions(){
+    handleDeleteOptions = () => {
      this.setState(()=>({options:[]}))
     }
 
-    handlePick(){
+    handlePick = () => {
         const randomNum = Math.floor(Math.random()*this.state.options.length)
         const randomOption = this.state.options[randomNum]
         alert(randomOption)
     }
 
-    handleDeleteOneOption(optionToRemove){
+    handleDeleteOneOption = (optionToRemove) => {
         this.setState((prevState)=>({options: prevState.options.filter((option)=> optionToRemove !== option)
         }))
     }
 
-    handleAddOption(option){
+    handleAddOption = (option) => {
         if(!option){
             return 'Enter valid value to add item.'
         } else if (this.state.options.indexOf(option)>-1){
