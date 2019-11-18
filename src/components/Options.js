@@ -1,5 +1,7 @@
-import React from 'react'
-import Option from './Option'
+// eslint-disable-next-line no-unused-vars
+import React from 'react';
+// eslint-disable-next-line no-unused-vars
+import Option from './Option';
 
 const Options = (props) =>{
     return(
